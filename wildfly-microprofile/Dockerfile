@@ -2,7 +2,7 @@
 FROM jboss/base-jdk:8
 
 # Set the WILDFLY_MICROPROFILE_VERSION env variable
-ENV WILDFLY_MICROPROFILE_VERSION 1.0.0.Final
+ENV WILDFLY_MICROPROFILE_VERSION 1.0.0
 ENV WILDFLY_SHA1 0c556883311a205a9f9487c203a0f68d806ed5ac
 ENV JBOSS_HOME /opt/jboss/wildfly
 
@@ -11,7 +11,7 @@ USER root
 # Add the WildFly distribution to /opt, and make wildfly the owner of the extracted tar content
 # Make sure the distribution is available from a well-known place
 RUN cd $HOME \
-    && curl -O https://github.com/jmesnil/wildfly-microprofile/releases/download/1.0.0/eclipse-microprofile-$WILDFLY_MICROPROFILE_VERSION.tar.gz \
+    && curl -O -L  https://github.com/jmesnil/wildfly-microprofile/releases/download/1.0.0/eclipse-microprofile-$WILDFLY_MICROPROFILE_VERSION.tar.gz \
     && sha1sum eclipse-microprofile-$WILDFLY_MICROPROFILE_VERSION.tar.gz | grep $WILDFLY_SHA1 \
     && tar xf eclipse-microprofile-$WILDFLY_MICROPROFILE_VERSION.tar.gz \
     && mv $HOME/eclipse-microprofile-$WILDFLY_MICROPROFILE_VERSION $JBOSS_HOME \
